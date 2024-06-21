@@ -39,6 +39,7 @@ st.dataframe(df_5)
 st.dataframe(df_6)
 
 
+st.linechart(df_1)
 # # Display data 2
 # st.write('Voici les données du deuxième fichier .csv :')
 # st.dataframe(df_2)
