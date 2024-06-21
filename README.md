@@ -37,30 +37,31 @@ Suppression des des redondances.
 
 Utilisation de SQL pour le traitement des données et de Python pour la création de visuels pertinents.
 
-a. Quelle est la distribution de la taille des Pals ?
-b. Quelle est la distribution de la catégorie des Pals ?
-c. Quelle est la distribution des points de vie des Pals ?
-d. Quelle est la distribution de la rareté des Pals ?
-e. Quelle est la distribution de la consommation alimentaire des Pals ?
-f. Quels sont les Pals pouvant offrir des produits utiles à votre campement grâce au ranch (laine, oeuf, lait, ...) ?
-g. Quelle est la distribution de la puissance de combat parmi les Pals ? Fournissez une liste des 10 Pals les plus puissants (selon l’attaque, la défense,...).
-h. Quelles sont les corrélations entre les différents attributs de combat ?
-i. Comment la rareté d'un Pal affecte-t-elle les valeurs de ses attributs de base ?
-j. Quelle est la rareté moyenne des Pals ayant la puissance d'attaque la plus élevée ?
-k. La taille des Pals affecte-t-elle leur performance au combat ?
-l. Les Pals les plus rapides sont-ils généralement plus efficaces au combat ?
-m. Comment former l'équipe la plus équilibrée en combinant des Pals aux attributs complémentaires ? Proposez une équipe équilibrée de 5 Pals.
-n. Quelles sont les compétences de travail les plus répandues chez les Pals ?
-o. Quelles sont les compétences de travail les moins répandues chez les Pals ?
-p. Combien de Pals conviennent au travail de nuit ?
-q. Quelles sont les caractéristiques communes des Pals qui conviennent au travail de nuit ?
-r. Quelle est la rareté moyenne des Pals possédant le plus de compétences ?
-s. Quels sont les Pals qui ont la vitesse de travail la plus élevée ?
-t. Quels sont les Pals dont la probabilité de capture est la plus élevée ? Comment cette information peut-elle être utilisée pour élaborer une stratégie de capture dans le jeu ?
-u. Quel Ordinary Boss ou Tower Boss a le score d'attributs de combat combinés le plus élevé ?
-v. Quelle est la répartition des niveaux d’apparition des Pals ?
-w. Quelle est la répartition des zones d’apparition ?
-x. De nombreuses autres observations peuvent être réalisées à l’aide des données et ne se limitent pas à la liste ci-dessus.
+a. Quelle est la distribution de la taille des Pals ?  
+b. Quelle est la distribution de la catégorie des Pals ?  
+c. Quelle est la distribution des points de vie des Pals ?  
+d. Quelle est la distribution de la rareté des Pals ?  
+e. Quelle est la distribution de la consommation alimentaire des Pals ?  
+f. Quels sont les Pals pouvant offrir des produits utiles à votre campement grâce au ranch (laine, oeuf, lait, ...) ?  
+g. Quelle est la distribution de la puissance de combat parmi les Pals ? Fournissez une liste des 10 Pals les plus puissants (selon l’attaque, la défense,...).  
+h. Quelles sont les corrélations entre les différents attributs de combat ?  
+i. Comment la rareté d'un Pal affecte-t-elle les valeurs de ses attributs de base ?  
+j. Quelle est la rareté moyenne des Pals ayant la puissance d'attaque la plus élevée ?  
+k. La taille des Pals affecte-t-elle leur performance au combat ?  
+l. Les Pals les plus rapides sont-ils généralement plus efficaces au combat ?  
+m. Comment former l'équipe la plus équilibrée en combinant des Pals aux attributs complémentaires ? Proposez une équipe équilibrée de 5 Pals.  
+n. Quelles sont les compétences de travail les plus répandues chez les Pals ?  
+o. Quelles sont les compétences de travail les moins répandues chez les Pals ?  
+p. Combien de Pals conviennent au travail de nuit ?  
+q. Quelles sont les caractéristiques communes des Pals qui conviennent au travail de nuit ?  
+r. Quelle est la rareté moyenne des Pals possédant le plus de compétences ?  
+s. Quels sont les Pals qui ont la vitesse de travail la plus élevée ?  
+t. Quels sont les Pals dont la probabilité de capture est la plus élevée ?  Comment cette information peut-elle être utilisée pour élaborer une stratégie de capture dans le jeu ?  
+u. Quel Ordinary Boss ou Tower Boss a le score d'attributs de combat combinés le plus élevé ?  
+v. Quelle est la répartition des niveaux d’apparition des Pals ?  
+w. Quelle est la répartition des zones d’apparition ?  
+x. De nombreuses autres observations peuvent être réalisées à l’aide des données et ne se limitent pas à la liste ci-dessus.  
+
 
 Vous continuez donc l’analyse exploratoire avec des
 recherches et une étude complémentaire.
