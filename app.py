@@ -9,7 +9,7 @@ import pandas as pd
 # Page configuration
 st.set_page_config(
     page_title="analyse des Pals",
-    page_icon="",
+    page_icon="img/pal-icon.webp",
     layout="wide",
     initial_sidebar_state="expanded")
 
@@ -18,4 +18,4 @@ st.set_page_config(
 
 #######################
 # Load data
-df_reshaped = pd.read_csv('data/------.csv')
+df_reshaped = pd.read_csv('data/Palworld_Data--Palu refresh level.csv')
