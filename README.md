@@ -16,7 +16,7 @@ A partir d'un dataset obtenu après une extraction des données du jeu, nous avo
 - etc...
 
 
-## Création et manipuler votre base de données avec [mysql](https://www.mysql.com/fr/).
+## Création et manipulation d'une base de données avec [mysql](https://www.mysql.com/fr/).
 
 ### Création de 6 tables :
 
@@ -63,4 +63,3 @@ w. Quelle est la répartition des zones d’apparition ?
 x. De nombreuses autres observations peuvent être réalisées à l’aide des données et ne se limitent pas à la liste ci-dessus.  
 y. Recherches et une étude complémentaire.
 z. Conclusions.  
-
