@@ -14,8 +14,6 @@ st.set_page_config(
     initial_sidebar_state="expanded")
 alt.themes.enable("dark")
 
-
-
 # Load data ----- TO BE UPDATED, WORK IN PROGRESS
 df_1 = pd.read_csv('data/Palworld_Data--Palu combat attribute table.csv')
 df_2 = pd.read_csv('data/Palworld_Data--Palu refresh level.csv')
@@ -24,9 +22,9 @@ df_4 = pd.read_csv('data/Palworld_Data-hide pallu attributes.csv')
 df_5 = pd.read_csv('data/Palworld_Data-Palu Job Skills Table.csv')
 df_6 = pd.read_csv('data/Palworld_Data-Tower BOSS attribute comparison.csv')
 
+######################################################
 
-
-#######################
+# Title
 st.title('Analyse des Pals')
 
 # Display data 1
