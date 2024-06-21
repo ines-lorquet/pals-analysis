@@ -1,7 +1,3 @@
-﻿"PS: This table only refreshes the data and does not include all occurrences of Palu. For example, the level 10 Balrog Sheep and Mammoth fights that appear in Maple Leaf Forest are random events. pending upgrade",,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,
-Pallu refresh level reference,,,,,Minimum appearance level of Palu + refresh area,,,,,,,,Palu's maximum appearance level + refresh area,,,,,
-,,,,,,,,,,,,,,,,,,
 ID,name,minimum level,maximum level,,ID,name,minimum level,fecundity,Pallu refresh type,Night only,refresh area,,ID,name,maximum level,Pallu refresh type,Night only,refresh area
 1,Mian Youyou,1,14,,1,Mian Youyou,1,1470,Creeps,,grassland,,1,Mian Youyou,14,Creeps,,grassland
 2,Naughty cat,1,13,,2,Naughty cat,1,1460,Creeps,,grassland,,2,Naughty cat,13,Random dungeon boss,,dungeon
