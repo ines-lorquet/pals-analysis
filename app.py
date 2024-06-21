@@ -6,7 +6,6 @@ import altair as alt
 import plotly.express as px
 
 
-
 # Configuration
 st.set_page_config(
     page_title="analyse des Pals",
@@ -29,6 +28,9 @@ df_6 = pd.read_csv('data/Palworld_Data-Tower BOSS attribute comparison.csv')
 # Title
 st.title('Analyse des Pals')
 
+st.subheader('Niveau maximum des Pals')
+st.line_chart(df_2,x='name', y='maximum level', color=None, width=None, height=None, use_container_width=True)
+
 # Display data 1
 st.write('Voici les données des fichiers .csv originaux :')
 st.dataframe(df_1)
@@ -39,7 +41,6 @@ st.dataframe(df_5)
 st.dataframe(df_6)
 
 
-st.linechart(df_1)
 # # Display data 2
 # st.write('Voici les données du deuxième fichier .csv :')
 # st.dataframe(df_2)
