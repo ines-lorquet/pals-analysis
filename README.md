@@ -61,7 +61,6 @@ u. Quel Ordinary Boss ou Tower Boss a le score d'attributs de combat combinés l
 v. Quelle est la répartition des niveaux d’apparition des Pals ?  
 w. Quelle est la répartition des zones d’apparition ?  
 x. De nombreuses autres observations peuvent être réalisées à l’aide des données et ne se limitent pas à la liste ci-dessus.  
+y. Recherches et une étude complémentaire.
+z. Conclusions.  
 
-
-Vous continuez donc l’analyse exploratoire avec des
-recherches et une étude complémentaire.
