@@ -6,6 +6,7 @@ import altair as alt
 import plotly.express as px
 
 
+
 # Configuration
 st.set_page_config(
     page_title="analyse des Pals",
@@ -15,6 +16,7 @@ st.set_page_config(
 alt.themes.enable("dark")
 
 # Load data ----- TO BE UPDATED, WORK IN PROGRESS
+# df_1 = pd.read_csv('data/Palworld_Data--Palu combat attribute table.csv')
 df_1 = pd.read_csv('data/Palworld_Data--Palu combat attribute table.csv')
 df_2 = pd.read_csv('data/Palworld_Data--Palu refresh level.csv')
 df_3 = pd.read_csv('data/Palworld_Data-comparison of ordinary BOSS attributes.csv')
