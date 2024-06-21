@@ -12,9 +12,7 @@ st.set_page_config(
     page_icon="img/pal-icon.webp",
     layout="wide",
     initial_sidebar_state="expanded")
-# alt.themes.enable("dark")
-
-
+alt.themes.enable("dark")
 
 # Load data ----- TO BE UPDATED, WORK IN PROGRESS
 df_1 = pd.read_csv('data/Palworld_Data--Palu combat attribute table.csv')
@@ -24,29 +22,29 @@ df_4 = pd.read_csv('data/Palworld_Data-hide pallu attributes.csv')
 df_5 = pd.read_csv('data/Palworld_Data-Palu Job Skills Table.csv')
 df_6 = pd.read_csv('data/Palworld_Data-Tower BOSS attribute comparison.csv')
 
+######################################################
 
-
-#######################
+# Title
 st.title('Analyse des Pals')
+
+# Display data 1
 st.write('Voici les données du premier fichier .csv :')
+st.dataframe(df_1)
 
 
-
-
-# Display data
+# Display data 2
+st.write('Voici les données du deuxième fichier .csv :')
 st.dataframe(df_2)
-
-
 # Check the columnns
 if 'Unnamed:1' in df_2.columns and 'Unnamed:2' in df_2.columns:
     # Converts column names inton  appropriate type if needed
-    df_1['Unnamed:1'] = df_1['Unnamed:1'].astype(str)
-    df_1['Unnamed:2'] = pd.to_numeric(df_1['Unnamed:2'], errors='coerce')
+    df_2['Unnamed:1'] = df_2['Unnamed:1'].astype(str)
+    df_2['Unnamed:2'] = pd.to_numeric(df_2['Unnamed:2'], errors='coerce')
 
 
     # With Altair
     st.subheader('Visualisation avec Altair')
-    chart = alt.Chart(df_1).mark_bar().encode(
+    chart = alt.Chart(df_2).mark_bar().encode(
         x='Unnamed:1',
         y='Unnamed:2'
     )
@@ -55,7 +53,7 @@ if 'Unnamed:1' in df_2.columns and 'Unnamed:2' in df_2.columns:
 
     # With Plotly
     st.subheader('Visualisation avec Plotly')
-    fig = px.bar(df_1, x='Unnamed:1', y='Unnamed:2')
+    fig = px.bar(df_2, x='Unnamed:1', y='Unnamed:2')
     st.plotly_chart(fig, use_container_width=True)
 
 else:
