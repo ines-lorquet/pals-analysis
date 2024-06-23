@@ -4,7 +4,7 @@
 
 Juin 2024
 
-ATTENTION :
+## ATTENTION :
 Les identifiants de connexion à la base de données sont dans le fichier .env  
 Ce fichier ne doit pas être sur github, car c'est un repo public.
 
