@@ -5,47 +5,43 @@ import os
 # Loads variables from .env (password, user_id, database name...)
 load_dotenv()
 
-# Configure connection to DB
-db_config = {
-    'host': os.getenv('DB_HOST'),
-    'database': os.getenv('DB_NAME'),
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'port': int(os.getenv('DB_PORT', 3306))  # port 3306 by default, convert into integer
-}
+
 
 # Global variable, to be called in every function linked to the table
-connection = None
+# connection = None
 
-def connection():
-    global connection
+def connect():
+    # global connection
     try:
-        connection = mysql.connector.connect(host='host', database='palworld_database', user='root', password='root')
+        connection = mysql.connector.connect(
+            host=os.getenv('DB_HOST'),
+            port= 3306,
+            database=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD')
+        )
+        print(connection)
 
         if connection.is_connected():
             print("Connexion réussie à la base de données")
-            # REQUESTS SHOULD GO HERE
+            return connection
     except mysql.connector.Error as err:
         print(f"Erreur: {err}")
 
-def add_table():
-    global connection
-    pass
 
-def close_connection():
+
+def close():
     global connection
     if connection.is_connected():
         connection.close()
         print("La connexion à la base de données a été fermée")
 
 
+##############################################
+if __name__ == "__main__":
+    # Connection
+    connect()
 
+    # Close connection
+    # close_connection()
 
-
-
-# Connection
-connection()
-
-add_table()
-# Close connection
-close_connection()
