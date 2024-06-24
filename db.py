@@ -14,18 +14,38 @@ db_config = {
     'port': int(os.getenv('DB_PORT', 3306))  # port 3306 by default, convert into integer
 }
 
+# Global variable, to be called in every function linked to the table
 connection = None
 
-# Example 
-try:
-    connection = mysql.connector.connect(host='host', database='palworld_database', user='root', password='root')
+def connection():
+    global connection
+    try:
+        connection = mysql.connector.connect(host='host', database='palworld_database', user='root', password='root')
 
+        if connection.is_connected():
+            print("Connexion réussie à la base de données")
+            # REQUESTS SHOULD GO HERE
+    except mysql.connector.Error as err:
+        print(f"Erreur: {err}")
+
+def add_table():
+    global connection
+    pass
+
+def close_connection():
+    global connection
     if connection.is_connected():
-        print("Connexion réussie à la base de données")
-        # REQUESTS SHOULD GO HERE
-except mysql.connector.Error as err:
-    print(f"Erreur: {err}")
-# finally:
-#     if connection.is_connected():
-#         connection.close()
-#         print("La connexion à la base de données a été fermée")
+        connection.close()
+        print("La connexion à la base de données a été fermée")
+
+
+
+
+
+
+# Connection
+connection()
+
+add_table()
+# Close connection
+close_connection()
