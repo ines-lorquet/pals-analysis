@@ -6,42 +6,40 @@ import os
 load_dotenv()
 
 
-
 # Global variable, to be called in every function linked to the table
 # connection = None
 
 def connect():
     # global connection
     try:
-        connection = mysql.connector.connect(
+        con = mysql.connector.connect(
             host=os.getenv('DB_HOST'),
             port= 3306,
             database=os.getenv('DB_NAME'),
             user=os.getenv('DB_USER'),
             password=os.getenv('DB_PASSWORD')
         )
-        print(connection)
+        print(con)
 
-        if connection.is_connected():
+        if con.is_connected():
             print("Connexion réussie à la base de données")
-            return connection
+            return con
     except mysql.connector.Error as err:
         print(f"Erreur: {err}")
 
 
 
-def close():
-    global connection
-    if connection.is_connected():
-        connection.close()
+def close(con):
+    # global connection
+    if con.is_connected():
+        con.close()
         print("La connexion à la base de données a été fermée")
 
 
 ##############################################
 if __name__ == "__main__":
     # Connection
-    connect()
+    con = connect()
 
-    # Close connection
     # close_connection()
-
+    close(con)
