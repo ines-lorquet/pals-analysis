@@ -2,12 +2,9 @@ import mysql.connector
 from dotenv import load_dotenv
 from db import connect, close
 
-load_dotenv()
-con = connect()
-cursor = con.cursor(buffered=True)
 
 # 6 requests to create 6 empty tables
-create_combat_attribute_table = """
+create_combat_attribute = """
 CREATE TABLE combat_attribute (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Chinese_name VARCHAR(50),
@@ -59,7 +56,7 @@ CREATE TABLE combat_attribute (
 )
 """
 
-create_job_skill_table = """
+create_job_skill = """
     CREATE TABLE palu_combat_attribute (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
@@ -88,14 +85,14 @@ create_job_skill_table = """
 
 """
 # Ines
-create_hidden_attribute_table = """
+create_hidden_attribute = """
     CREATE TABLE hidden_attribute (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
 );
 """
 
-create_refresh_area_table = """
+create_refresh_area = """
 CREATE TABLE palu_data (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -108,14 +105,14 @@ CREATE TABLE palu_data (
 );
 """
 
-create_ordinary_boss_table = """
+create_ordinary_boss = """
     CREATE TABLE ordinary_boss (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
 );
 """
 # Ines
-create_tower_boss_table = """
+create_tower_boss = """
     CREATE TABLE tower_boss (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
@@ -123,26 +120,28 @@ create_tower_boss_table = """
 """
 
 
-try:
-    cursor.execute(create_combat_attribute_table)
-    # print("Table 'combat_attribute' créée avec succès.")
-    cursor.execute(create_job_skill_table)
-    cursor.execute(create_hidden_attribute_table)
-    cursor.execute(create_refresh_area_table)
-    cursor.execute(create_ordinary_boss_table)
-    cursor.execute(create_tower_boss_table)
+
+if __name__ == "__main__":
+
+    load_dotenv()
+    con = connect()
+    cursor = con.cursor(buffered=True)
+
+    try:
+        cursor.execute(create_combat_attribute)
+        cursor.execute(create_job_skill)
+        cursor.execute(create_hidden_attribute)
+        cursor.execute(create_refresh_area)
+        cursor.execute(create_ordinary_boss)
+        cursor.execute(create_tower_boss)
 
 
-except mysql.connector.Error as err:
-    print(f"Erreur MySQL : {err}")
+    except mysql.connector.Error as err:
+        print(f"Erreur MySQL : {err}")
 
-finally:
-    # fermer le cursor après chaque requête
-    if cursor is not None:
-        cursor.close()
-
-    # fermer la database une seule fois, a la fin
-    if con is not None and con.is_connected():
-        con.close()
+    finally:
+        # fermer la database une seule fois, a la fin
+        if con is not None and con.is_connected():
+            con.close()
 
 

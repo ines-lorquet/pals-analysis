@@ -1,16 +1,24 @@
+import mysql.connector
+from dotenv import load_dotenv
+from db import connect, close
 import os
 import csv
-import gdown
-from db import connect, close
-from tables import (create_combat_attribute_table,
-                    create_job_skill_table, 
-                    create_hidden_attribute_table,
-                    create_refresh_area_table,
-                    create_ordinary_boss_table,
-                    create_tower_boss_table)
+from tables import (create_combat_attribute,
+                    create_job_skill, 
+                    create_hidden_attribute,
+                    create_refresh_area,
+                    create_ordinary_boss,
+                    create_tower_boss)
 
-def download_csv_from_drive(drive_folder_url, local_path):
-    gdown.download_folder(url=drive_folder_url, output=local_path, quiet=False)
+
+'''
+Gets connection parameters from .env and db.py
+Gets the table structure from tables.py
+
+Imports the data from google drive
+Fills the tables with the data
+
+'''
 
 def import_csv_to_db(csv_file_path, table_name):
     con = connect()
@@ -28,25 +36,34 @@ def import_csv_to_db(csv_file_path, table_name):
         placeholders = ', '.join(['%s'] * len(header))
         columns = ', '.join(header)
 
+        insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+
         for row in csv_reader:
-            cursor.execute(f"""
-                INSERT INTO {table_name} (
-                    Chinese_name, Name, code_name, IsPal, Tribe, BPClass, Variant, Volume_size, Rarity, Element1, Element2, Genus_category, Organisation, Weapon, Weapon_equip, Noctumal, `4D_total`, HP, Melee_attack, Remote_attack, Defense, Support, Speed_of_work, Level_1, Level_20, Level_50, Air_response, Al_sight_response, Endurance, Slow_walking_speed, Walking_speed, Running_speed, Riding_sprint_speed, Being_damage_multiplier, Catch_rate, Experience_multiplier, Price, Must_bring_entry_1, Must_bring_entry_2, Numerical_description, lv1, lv2, lv3, lv4, lv5, Skill_description
-                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, row)
+            cursor.execute(insert_query, row)
     
     con.commit()
     cursor.close()
     close(con)
     print(f"Data imported successfully into table {table_name}.")
 
+
 if __name__ == "__main__":
-    drive_folder_url = 'https://drive.google.com/drive/folders/1K2xq7ShnBIJ-Hj9S3_sXobj2HNACk2mF'
-    local_path = 'downloaded_csv_files'
-
     
-    download_csv_from_drive(drive_folder_url, local_path)
+    load_dotenv()
+    con = connect()
+    cursor = con.cursor(buffered=True)
 
+    path = 'data'
+
+    # Create tables
+    cursor.execute(create_combat_attribute)
+    cursor.execute(create_job_skill)
+    # cursor.execute(create_hidden_attribute)
+    # cursor.execute(create_refresh_area)
+    # cursor.execute(create_ordinary_boss)
+    # cursor.execute(create_tower_boss)
+
+    # .csv files and corresponding tables
     csv_files_and_tables = [
         ('Palworld_Data--Palu combat attribute table.csv',           'combat_attribute'),
         ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
@@ -57,15 +74,7 @@ if __name__ == "__main__":
     ]
 
 
-    # # Create tables
-    # create_combat_attribute_table()
-    # create_refresh_area_table()
-    # create_job_skill_table()
-    # create_hidden_attribute_table()
-    # create_ordinary_boss_table()
-    # create_tower_boss_table()
-
     # Import data
     for csv_file, table_name in csv_files_and_tables:
-        csv_file_path = os.path.join(local_path, csv_file)
+        csv_file_path = os.path.join(path, csv_file)
         import_csv_to_db(csv_file_path, table_name)
