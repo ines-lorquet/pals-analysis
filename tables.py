@@ -137,10 +137,6 @@ except mysql.connector.Error as err:
     print(f"Erreur MySQL : {err}")
 
 finally:
-    # fermer le cursor après chaque requête
-    if cursor is not None:
-        cursor.close()
-
     # fermer la database une seule fois, a la fin
     if con is not None and con.is_connected():
         con.close()
