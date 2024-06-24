@@ -3,12 +3,11 @@ from dotenv import load_dotenv
 from db import connect, close
 
 load_dotenv()
-
 con = connect()
 cursor = con.cursor(buffered=True)
 
-##########################################
-create_combat_attribute_table_query = """
+# 6 requests to create 6 empty tables
+create_combat_attribute_table = """
 CREATE TABLE combat_attribute (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Chinese_name VARCHAR(50),
@@ -60,7 +59,7 @@ CREATE TABLE combat_attribute (
 )
 """
 
-create_job_skill_table_query = """
+create_job_skill_table = """
     CREATE TABLE palu_combat_attribute (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
@@ -88,13 +87,15 @@ create_job_skill_table_query = """
 );
 
 """
-
 # Ines
-create_hidden_attribute_table_query = """
-    pass
+create_hidden_attribute_table = """
+    CREATE TABLE hidden_attribute (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    English_name VARCHAR(100),
+);
 """
 
-create_refresh_area_table_query = """
+create_refresh_area_table = """
 CREATE TABLE palu_data (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -107,26 +108,29 @@ CREATE TABLE palu_data (
 );
 """
 
-create_ordinary_boss_table_query = """
-    pass
+create_ordinary_boss_table = """
+    CREATE TABLE ordinary_boss (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    English_name VARCHAR(100),
+);
 """
-
 # Ines
-create_tower_boss_table_query = """
-    pass
+create_tower_boss_table = """
+    CREATE TABLE tower_boss (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    English_name VARCHAR(100),
+);
 """
-################################################
 
 
 try:
-    cursor.execute(create_combat_attribute_table_query)
-    print("Table 'combat_attribute' créée avec succès.")
-
-    cursor.execute(create_job_skill_table_query)
-    print("Table 'palu_combat_attribute' créée avec succès.")
-
-    cursor.execute(create_refresh_area_table_query)
-    print("Table 'palu_data' créée avec succès.")
+    cursor.execute(create_combat_attribute_table)
+    # print("Table 'combat_attribute' créée avec succès.")
+    cursor.execute(create_job_skill_table)
+    cursor.execute(create_hidden_attribute_table)
+    cursor.execute(create_refresh_area_table)
+    cursor.execute(create_ordinary_boss_table)
+    cursor.execute(create_tower_boss_table)
 
 
 except mysql.connector.Error as err:
@@ -142,16 +146,3 @@ finally:
         con.close()
 
 
-
-
-
-    # # Fermer le curseur après chaque requête
-    # if cursor is not None:
-    #     cursor.close()
-
-    # # Fermer la connexion à la base de données
-    # if con is not None and con.is_connected():
-    #     close_connection()
-
-    # if __name__ == "__main__":
-    #     create_combat_attribute_table_query()

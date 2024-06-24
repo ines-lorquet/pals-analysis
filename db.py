@@ -5,12 +5,7 @@ import os
 # Loads variables from .env (password, user_id, database name...)
 load_dotenv()
 
-
-# Global variable, to be called in every function linked to the table
-# connection = None
-
 def connect():
-    # global connection
     try:
         con = mysql.connector.connect(
             host=os.getenv('DB_HOST'),
@@ -26,8 +21,6 @@ def connect():
             return con
     except mysql.connector.Error as err:
         print(f"Erreur: {err}")
-
-
 
 def close(con):
     # global connection
