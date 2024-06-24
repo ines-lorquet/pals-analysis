@@ -139,9 +139,9 @@ if __name__ == "__main__":
     except mysql.connector.Error as err:
         print(f"Erreur MySQL : {err}")
 
-    finally:
-        # fermer la database une seule fois, a la fin
-        if con is not None and con.is_connected():
-            con.close()
+finally:
+    # fermer la database une seule fois, a la fin
+    if con is not None and con.is_connected():
+        con.close()
 
 
