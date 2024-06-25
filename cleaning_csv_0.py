@@ -33,9 +33,7 @@ files_to_clean = [
     (combat_attribute, 1),
     (refresh_level, 4),
     (ordinary_boss, 3),
-    (hidden_attributes, 1),
-    (job_skills, 1),
-    (tower_boss, 1)
+    (job_skills, 1)
 ]
 
 # Ensure the processed_data directory exists
