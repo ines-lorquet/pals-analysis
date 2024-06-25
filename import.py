@@ -9,16 +9,20 @@ from tables import (create_combat_attribute,
                     create_refresh_area,
                     create_ordinary_boss,
                     create_tower_boss)
+from cleaning_csv import clean_csv
+from cleaning_csv import files_to_clean, raw_data_dir, processed_data_dir
 
 
 '''
 Gets connection parameters from .env and db.py
 Gets the table structure from tables.py
 
-Imports the data from google drive
+Imports the processed data from the folder
 Fills the tables with the data
 
 '''
+
+
 
 def import_csv_to_db(csv_file_path, table_name):
     con = connect()
@@ -52,8 +56,9 @@ if __name__ == "__main__":
     load_dotenv()
     con = connect()
     cursor = con.cursor(buffered=True)
-
-    path = 'data'
+    #  missing 3 required positional arguments: 'file_path', 'rows_to_skip', and 'output_path'
+    clean_csv(file_path=raw_data_dir,  rows_to_skip=files_to_clean ,output_path = processed_data_dir)
+    path = 'processed-data'
 
     # Create tables
     cursor.execute(create_combat_attribute)

@@ -57,7 +57,7 @@ CREATE TABLE combat_attribute (
 """
 
 create_job_skill = """
-    CREATE TABLE palu_combat_attribute (
+CREATE TABLE job_skill (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
     Chinese_name VARCHAR(100),
@@ -86,40 +86,55 @@ create_job_skill = """
 """
 # Ines
 create_hidden_attribute = """
-    CREATE TABLE hidden_attribute (
+CREATE TABLE hidden_attribute (
     ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     English_name VARCHAR(100),
 );
 """
 
 create_refresh_area = """
-CREATE TABLE palu_data (
-    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+CREATE TABLE refresh_area (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
     minimum_level INT,
     maximum_level INT,
     fecundity INT,
-    pallu_refresh_type VARCHAR(100),
+    palu_refresh_type VARCHAR(50),
     night_only BOOLEAN,
-    refresh_area VARCHAR(100)
+    refresh_area VARCHAR(50)
 );
 """
 
 create_ordinary_boss = """
-    CREATE TABLE ordinary_boss (
-    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    English_name VARCHAR(100),
+CREATE TABLE ordinary_boss (
+    name VARCHAR(50),
+    hp INT,
+    remote_attack INT,
+    riding_speed INT
 );
 """
 # Ines
 create_tower_boss = """
     CREATE TABLE tower_boss (
-    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    English_name VARCHAR(100),
+    name VARCHAR(50),
+    hp INT,
+    melee_attack INT,
+    remote_attack INT,
+    defense INT,
+    support INT,
+    experience_ratio INT,
+    slow_walking_speed INT,
+    walking_speed INT,
+    running_speed INT,
+    riding_speed INT,
+    handling_speed INT,
+    ignore_bluntness BOOLEAN,
+    ignore_displacement BOOLEAN,
+    biological_grade INT,
+    endurance INT,
+    fecundity INT
 );
 """
-
-
 
 if __name__ == "__main__":
 
@@ -139,9 +154,9 @@ if __name__ == "__main__":
     except mysql.connector.Error as err:
         print(f"Erreur MySQL : {err}")
 
-finally:
+    finally:
     # fermer la database une seule fois, a la fin
-    if con is not None and con.is_connected():
-        con.close()
+        if con is not None and con.is_connected():
+            con.close()
 
 
