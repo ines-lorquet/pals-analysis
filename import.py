@@ -2,7 +2,6 @@ import mysql.connector
 from dotenv import load_dotenv
 from db import connect, close
 import os
-from cleaning_csv import clean_csv  # Assurez-vous d'importer clean_csv correctement
 import csv
 from tables import (create_combat_attribute,
                     create_job_skill, 
@@ -11,15 +10,13 @@ from tables import (create_combat_attribute,
                     create_ordinary_boss,
                     create_tower_boss)
 
-
 '''
 Gets connection parameters from .env and db.py
 Gets the table structure from tables.py
 
-Imports the data from google drive
+Imports the data from raw_data
 Fills the tables with the data
 '''
-
 def import_csv_to_db(csv_file_path, table_name):
     con = connect()
     if con is None:
