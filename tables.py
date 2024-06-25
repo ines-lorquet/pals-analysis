@@ -93,7 +93,7 @@ create_hidden_attribute = """
 """
 
 create_refresh_area = """
-CREATE TABLE IF NOT EXISTS palu_refresh_level (
+CREATE TABLE IF NOT EXISTS refresh_area (
     ID FLOAT,
     name VARCHAR(255),
     minimum_level FLOAT,
