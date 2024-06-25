@@ -93,15 +93,15 @@ CREATE TABLE hidden_attribute (
 """
 
 create_refresh_area = """
-CREATE TABLE refresh_area (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
+CREATE TABLE palu_data (
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
     minimum_level INT,
     maximum_level INT,
     fecundity INT,
-    palu_refresh_type VARCHAR(50),
+    pallu_refresh_type VARCHAR(100),
     night_only BOOLEAN,
-    refresh_area VARCHAR(50)
+    refresh_area VARCHAR(100)
 );
 """
 
