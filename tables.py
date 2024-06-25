@@ -102,17 +102,15 @@ CREATE TABLE IF NOT EXISTS refresh_area (
     ID_1 INT,
     name_1 VARCHAR(255),
     minimum_level_1 INT,
+CREATE TABLE refresh_area (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    minimum_level INT,
+    maximum_level INT,
     fecundity INT,
-    Pallu_refresh_type VARCHAR(255),
-    Night_only VARCHAR(255),
-    refresh_area VARCHAR(255),
-    Unnamed_12 FLOAT,
-    ID_2 FLOAT,
-    name_2 VARCHAR(255),
-    maximum_level_1 FLOAT,
-    Pallu_refresh_type_1 VARCHAR(255),
-    Night_only_1 VARCHAR(255),
-    refresh_area_1 VARCHAR(255)
+    palu_refresh_type VARCHAR(50),
+    night_only BOOLEAN,
+    refresh_area VARCHAR(50)
 );
 """
 
