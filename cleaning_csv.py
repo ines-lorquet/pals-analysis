@@ -1,6 +1,6 @@
 import csv
 import os
-from csv_name import combat_attribute, refresh_level, ordinary_BOSS_attributes, Palu_Job_Skills_Table
+from csv_name import combat_attribute, refresh_level, ordinary_boss, job_skills
 
 def clean_csv(file_path, rows_to_skip, output_path):
     # Read the CSV file
@@ -16,23 +16,24 @@ def clean_csv(file_path, rows_to_skip, output_path):
         writer = csv.writer(outfile)
         writer.writerows(cleaned_data)
 
-# List of CSV files to process and the number of rows to skip for each
-files_to_clean = [
-    (combat_attribute, 1),
-    (refresh_level, 4),
-    (ordinary_BOSS_attributes, 3),
-    (Palu_Job_Skills_Table, 1)
-]
+def process_files():
+    # Directories
+    raw_data_dir = 'raw_data'
+    processed_data_dir = 'processed_data'
+    os.makedirs(processed_data_dir, exist_ok=True)
 
-# Ensure the processed_data directory exists
-raw_data_dir = 'raw_data'
-processed_data_dir = 'processed_data'
-os.makedirs(processed_data_dir, exist_ok=True)
+    # List of CSV files to process and the number of rows to skip for each
+    files_to_clean = [
+        (combat_attribute, 1),
+        (refresh_level, 4),
+        (ordinary_boss, 3),
+        (job_skills, 1)
+    ]
 
-# Process each file
-for file_path, rows_to_skip in files_to_clean:
-    input_path = os.path.join(raw_data_dir, file_path)
-    output_path = os.path.join(processed_data_dir, file_path)
-    clean_csv(input_path, rows_to_skip, output_path)
+    # Process each file
+    for file_name, rows_to_skip in files_to_clean:
+        input_path = os.path.join(raw_data_dir, file_name)
+        output_path = os.path.join(processed_data_dir, file_name)
+        clean_csv(input_path, rows_to_skip, output_path)
 
-print("Les fichiers CSV ont été nettoyés et enregistrés avec succès.")
+    print("Les fichiers CSV ont été nettoyés et enregistrés avec succès.")
