@@ -17,7 +17,7 @@ Gets the table structure from tables.py
 Imports the data from raw_data
 Fills the tables with the data
 '''
-def import_csv_to_db(csv_file_path, table_name):
+def import_csv_to_db(csv_file_name, table_name):
     con = connect()
     if con is None:
         print("Failed to connect to the database.")
@@ -25,7 +25,7 @@ def import_csv_to_db(csv_file_path, table_name):
     
     cursor = con.cursor()
 
-    with open(csv_file_path, mode='r', encoding='utf-8-sig') as csv_file:
+    with open(csv_file_name, mode='r', encoding='utf-8-sig') as csv_file:
         csv_reader = csv.reader(csv_file)
         # Skip the header row
         header = next(csv_reader)  
@@ -45,12 +45,10 @@ def import_csv_to_db(csv_file_path, table_name):
 
 
 if __name__ == "__main__":
-    
-    load_dotenv()
     con = connect()
     cursor = con.cursor(buffered=True)
 
-    path = 'processed_data'
+    path = 'raw_data'
 
     # Create tables
     cursor.execute(create_combat_attribute)
@@ -72,7 +70,8 @@ if __name__ == "__main__":
 
     # Import data
     for csv_file, table_name in csv_files_and_tables:
-        csv_file_path = os.path.join(path, csv_file)
-        import_csv_to_db(csv_file_path, table_name)
+        csv_file_name = os.path.join(path, csv_file)
+        print(csv_file_name)
+        import_csv_to_db(csv_file_name, table_name)
 
     print("Les données ont été importées avec succès dans les tables.")
