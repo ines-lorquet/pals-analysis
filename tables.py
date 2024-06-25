@@ -1,11 +1,10 @@
 import mysql.connector
-from dotenv import load_dotenv
-from db import connect, close
+from db import connect
 
 
 # 6 requests to create 6 empty tables
 create_combat_attribute = """
-CREATE TABLE combat_attribute (
+CREATE TABLE IF NOT EXISTS combat_attribute (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Chinese_name VARCHAR(50),
     name VARCHAR(50),
@@ -57,7 +56,7 @@ CREATE TABLE combat_attribute (
 """
 
 create_job_skill = """
-CREATE TABLE job_skill (
+CREATE TABLE IF NOT EXISTS job_skill (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     english_name VARCHAR(100),
     chinese_name VARCHAR(100),
@@ -86,7 +85,7 @@ CREATE TABLE job_skill (
 """
 # Ines
 create_hidden_attribute = """
-CREATE TABLE hidden_attribute(
+CREATE TABLE IF NOT EXISTS hidden_attribute(
     chinese_name VARCHAR(255),
     code_name VARCHAR(255),
     override_name_text_id VARCHAR(255),
@@ -163,7 +162,7 @@ CREATE TABLE hidden_attribute(
 """
 
 create_refresh_area = """
-CREATE TABLE refresh_area (
+CREATE TABLE IF NOT EXISTS refresh_area (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
     minimum_level INT,
@@ -176,7 +175,7 @@ CREATE TABLE refresh_area (
 """
 
 create_ordinary_boss = """
-CREATE TABLE ordinary_boss (
+CREATE TABLE IF NOT EXISTS ordinary_boss (
     name VARCHAR(50),
     hp INT,
     remote_attack INT,
@@ -185,7 +184,7 @@ CREATE TABLE ordinary_boss (
 """
 # Ines
 create_tower_boss = """
-CREATE TABLE tower_boss (
+CREATE TABLE IF NOT EXISTS tower_boss (
     name VARCHAR(50),
     hp INT,
     melee_attack INT,
@@ -207,10 +206,8 @@ CREATE TABLE tower_boss (
 """
 
 if __name__ == "__main__":
-
-    load_dotenv()
-    con = connect()
-    cursor = con.cursor(buffered=True)
+    conn = connect()
+    cursor = conn.cursor(buffered=True)
 
     try:
         cursor.execute(create_combat_attribute)
@@ -226,7 +223,7 @@ if __name__ == "__main__":
 
     finally:
     # fermer la database une seule fois, a la fin
-        if con is not None and con.is_connected():
-            con.close()
+        if conn is not None and conn.is_connected():
+            conn.close()
 
 

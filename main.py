@@ -1,8 +1,8 @@
 import mysql.connector
-from dotenv import load_dotenv
 from db import connect, close
 import os
-from cleaning_csv import *
+# from cleaning_csv import clean_csv, files_to_clean
+from import_csv import import_csv_to_db
 import csv
 from tables import (create_combat_attribute,
                     create_job_skill, 
@@ -12,9 +12,8 @@ from tables import (create_combat_attribute,
                     create_tower_boss)
 
 
-load_dotenv()
-con = connect()
-cursor = con.cursor(buffered=True)
+conn = connect()
+cursor = conn.cursor(buffered=True)
 
 path = 'processed_data'
 
@@ -38,7 +37,7 @@ csv_files_and_tables = [
 
 # Import data
 for csv_file, table_name in csv_files_and_tables:
-    csv_file_path = os.path.join(path, csv_file)
-    import_csv_to_db(csv_file_path, table_name)
+    csv_file_name = os.path.join(path, csv_file)
+    import_csv_to_db(csv_file_name, table_name)
 
 print("Les données ont été importées avec succès dans les tables.")

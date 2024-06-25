@@ -14,9 +14,9 @@ hidden_attributes = 'Palworld_Data-hide pallu attributes.csv'
 job_skills = 'Palworld_Data-Palu Job Skills Table.csv'
 tower_boss = 'Palworld_Data-Tower BOSS attribute comparison.csv'
 
-def clean_csv(file_path, rows_to_skip, output_path):
+def clean_csv(file_name, rows_to_skip, output_path):
     # Read the CSV file
-    with open(file_path, mode='r', newline='', encoding='utf-8') as infile:
+    with open(file_name, mode='r', newline='', encoding='utf-8') as infile:
         reader = csv.reader(infile)
         data = list(reader)
 
