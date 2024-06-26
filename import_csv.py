@@ -23,7 +23,7 @@ def import_csv_to_db(csv_file_name, table_name):
         print("Failed to connect to the database.")
         return
     
-    cursor = con.cursor()
+    cursor = conn.cursor()
 
     with open(csv_file_name, mode='r', encoding='utf-8-sig') as csv_file:
         csv_reader = csv.reader(csv_file)
