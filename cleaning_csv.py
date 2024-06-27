@@ -1,5 +1,6 @@
 import csv
 import os
+from db import connect
 
 '''
 Delete the unnecessary top lines of the raw csv files
@@ -23,19 +24,61 @@ def clean_csv(file_path, rows_to_skip, output_path):
             reader = csv.reader(infile)
             data = list(reader)
         
-        for row in data[:5]:
+        for row in data[:rows_to_skip]:
             print(row)
 
+        # Checks every cells, fills the empty cells with '0', in every rows
+        # VERIFIER LE TYPE DE LA COLONNE
         data = [[cell if cell != '' else '0' for cell in row] for row in data]
 
-        seen = set()
-        unique_data = []
-        for row in data:
-            row_tuple = tuple(row)
-            if row_tuple not in seen:
-                seen.add(row_tuple)
-                unique_data.append(row)
-        data = unique_data
+
+######## A FAIRE EN SQL
+        # # ensemble 'déjà vu' vide
+        # seen = set()      
+        # #  liste 'unique' vide
+        # unique_data = []
+        # # parcours chaque ligne
+        # for row in data:
+        #     # convertit la ligne en un tuple row_tuple
+        #     row_tuple = tuple(row)
+        #     #  Si le tuple n'est pas déjà vu
+        #     if row_tuple not in seen:
+        #         # il est ajouté à l'ensemble'déjà vu'
+        #         seen.add(row_tuple)
+        #         #  ajoute la ligne à la liste 'unique'
+        #         unique_data.append(row)
+        # # ne reste que les éléments unique dans data ENLEVE LES DOUBLONS
+        # data = unique_data
+########
+        from tables import (create_combat_attribute,
+                    create_job_skill, 
+                    create_hidden_attribute,
+                    create_refresh_area,
+                    create_ordinary_boss,
+                    create_tower_boss)
+        conn = connect()
+        cursor = conn.cursor(buffered=True)
+
+
+        # Create tables
+        # supprime les doublons
+        cursor.execute(create_combat_attribute)
+        cursor.execute("SELECT DISTINCT * FROM combat_attribute;")
+        cursor.execute(create_job_skill)
+        cursor.execute("SELECT DISTINCT * FROM job_skill;")
+        cursor.execute(create_hidden_attribute)
+        cursor.execute("SELECT DISTINCT * FROM hidden_attribute;")
+        cursor.execute(create_refresh_area)
+        cursor.execute("SELECT DISTINCT * FROM refresh_area;")
+        cursor.execute(create_ordinary_boss)
+        cursor.execute("SELECT DISTINCT * FROM ordinary_boss;")
+        cursor.execute(create_tower_boss)
+        cursor.execute("SELECT DISTINCT * FROM tower_boss;")
+
+
+
+
+
 
 
         for row in data:
@@ -45,16 +88,16 @@ def clean_csv(file_path, rows_to_skip, output_path):
 
         data = [row for row in data if row[1] != 'valeur_indesirable'] 
 
-        for row in data:
-            if '' in row:
-                print(row)
+        # for row in data:
+        #     if '' in row:                    A FAIRE SQL, POURQUOI SUPRIMER LES COLONNES DE DROITE
+        #         print(row)
 
         seen = set()
-        for row in data:
-            row_tuple = tuple(row)
-            if row_tuple in seen:
-                print(f"Doublon trouvé: {row}")
-            seen.add(row_tuple)
+        # for row in data:
+        #     row_tuple = tuple(row)           DEJA FAIT LIGNE 32
+        #     if row_tuple in seen:
+        #         print(f"Doublon trouvé: {row}")
+        #     seen.add(row_tuple)
         
         # Skip the specified number of rows
         cleaned_data = data[rows_to_skip:]
