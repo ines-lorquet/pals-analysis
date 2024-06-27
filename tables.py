@@ -6,56 +6,56 @@ from db import connect
 
 create_combat_attribute ="""
 CREATE TABLE IF NOT EXISTS combat_attribute (
-    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    Chinese_name VARCHAR(255),
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    chinese_name VARCHAR(255),
     name VARCHAR(255),
-    CodeName VARCHAR(255),
-    OverrideNameTextID VARCHAR(255),
-    NamePrefixID VARCHAR(255),
-    OverridePartnerSkillTextID VARCHAR(255),
-    IsPal BOOLEAN,
-    Tribe VARCHAR(255),
-    BPClass VARCHAR(255),
+    codename VARCHAR(255),
+    overridenametextid VARCHAR(255),
+    nameprefixid VARCHAR(255),
+    overridepartnerskilltextid VARCHAR(255),
+    ispal BOOLEAN,
+    tribe VARCHAR(255),
+    bpclass VARCHAR(255),
     variant VARCHAR(255),
-    Volume_size VARCHAR(255),
+    volume_size VARCHAR(255),
     rarity INT,
-    Element_1 VARCHAR(255),
-    Element_2 VARCHAR(255),
-    GenusCategory VARCHAR(255),
-    Organization VARCHAR(255),
+    element_1 VARCHAR(255),
+    element_2 VARCHAR(255),
+    genuscategory VARCHAR(255),
+    organization VARCHAR(255),
     weapon VARCHAR(255),
-    WeaponEquip VARCHAR(255),
+    weaponequip VARCHAR(255),
     nocturnal BOOLEAN,
-    `4D_total` INT,
-    HP INT,
+    d4_total INT,
+    hp INT,
     melee_attack INT,
-    Remote_attack INT,
+    remote_attack INT,
     defense INT,
     support INT,
-    Speed_of_work INT,
-    Level_1 VARCHAR(255),
-    Level_20 VARCHAR(255),
-    Level_50 VARCHAR(255),
-    AIRResponse VARCHAR(255),
-    AISightResponse VARCHAR(255),
+    speed_of_work INT,
+    level_1 VARCHAR(255),
+    level_20 VARCHAR(255),
+    level_50 VARCHAR(255),
+    airresponse VARCHAR(255),
+    aisightresponse VARCHAR(255),
     endurance INT,
     slow_walking_speed INT,
     walking_speed INT,
     running_speed INT,
-    Riding_sprint_speed INT,
+    riding_sprint_speed INT,
     being_damage_multiplier VARCHAR(255),
     catch_rate VARCHAR(255),
-    Experience_multiplier VARCHAR(255),
+    experience_multiplier VARCHAR(255),
     price INT,
-    Must_bring_entry_1 VARCHAR(255),
-    Must_bring_entry_2 VARCHAR(255),
-    Numerical_description VARCHAR(255),
+    must_bring_entry_1 VARCHAR(255),
+    must_bring_entry_2 VARCHAR(255),
+    numerical_description VARCHAR(255),
     lv1 INT,
     lv2 INT,
     lv3 INT,
     lv4 INT,
     lv5 INT,
-    Skill_description TEXT
+    skill_description TEXT
 );
 """
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS job_skill (
 );
 
 """
-# Ines
+
 create_hidden_attribute = """
 CREATE TABLE IF NOT EXISTS hidden_attribute(
     chinese_name VARCHAR(255),
@@ -164,6 +164,7 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
     passive_skill_4 DOUBLE PRECISION
 );
 
+
 """
 
 create_refresh_area = """
@@ -172,10 +173,11 @@ CREATE TABLE IF NOT EXISTS refresh_area (
     name VARCHAR(50),
     minimum_level INT,
     maximum_level INT,
+    empty1 INT,
     fecundity INT,
     palu_refresh_type VARCHAR(50),
     night_only BOOLEAN,
-    refresh_area VARCHAR(50)
+    refresh_area VARCHAR(50),
 );
 """
 
@@ -183,11 +185,13 @@ create_ordinary_boss = """
 CREATE TABLE IF NOT EXISTS ordinary_boss (
     name VARCHAR(50),
     hp INT,
+    empty2 VARCHAR(50),
     remote_attack INT,
+    empty1 INT,
     riding_speed INT
 );
 """
-# Ines
+
 create_tower_boss = """
 CREATE TABLE IF NOT EXISTS tower_boss (
     name VARCHAR(50),
