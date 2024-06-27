@@ -52,12 +52,12 @@ def count_hp():
 
 # d
 def count_rarity():
-    sql = "SELECT rarity, COUNT(*) FROM `combat-attribute` GROUP BY rarity ORDER BY COUNT(*) DESC;"
+    sql = "SELECT rarity, COUNT(*) FROM `combat_attribute` GROUP BY rarity ORDER BY COUNT(*) DESC;"
     return fetch_one(sql)
 
 # e
 def count_food():
-    sql = "SELECT `Food intake`, COUNT(*) FROM `job-skill` GROUP BY `Food intake` ORDER BY COUNT(*) DESC;"
+    sql = "SELECT `Food intake`, COUNT(*) FROM `job_skill` GROUP BY `Food intake` ORDER BY COUNT(*) DESC;"
     return fetch_one(sql)
 
 # f
@@ -153,41 +153,62 @@ def get_average_rarity_of_top_power_pals():
 # o
 
 # p
-
+def count_night():
+    sql = "SELECT COUNT(*) FROM job_skill WHERE night_shift = 'yes';"
+    return fetch(sql)
 # q
 
 # r
 
 # s
-
+def max_speed():
+    sql = "SELECT English name,Handling speed FROM job_skill WHERE Handling speed = (SELECT MAX(Handling speed) FROM job_skill);"
+    return fetch_one(sql)
 # t
 
 # v
 
 # w
-
 def count_area():
     sql = "SELECT refresh_area, COUNT(*) AS nombre_d_apparitions FROM refresh_area GROUP BY refresh_area ORDER BY nombre_d_apparitions DESC;"
     return fetch_one(sql)
 
 
-
+#a
 print(count_size())
+#b
 print(count_category())
+#c
 print(count_hp())
+#d
 print(count_rarity())
+#'e
 print(count_food())
+#f
 print(select_items())
+#g
 print(count_melee())
 print(count_remote())
 print(count_defense())
 print(top_10_pals())
-
+#h
 correlation_matrix = calculate_combat_attribute_correlations()
 print(correlation_matrix)
-
+#i
+#...  
+# j
 average_rarity = get_average_rarity_of_top_power_pals()
 print(f"Rareté moyenne des Pals ayant la puissance d'attaque totale la plus élevée : {average_rarity}")
 
+#s
+print(max_speed())
+#t
+ 
+#u
+
+#v
+
+#w
+print(count_area())
 connection, cursor = connect()
 disconnect(connection, cursor)
