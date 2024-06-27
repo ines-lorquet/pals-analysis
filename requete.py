@@ -25,29 +25,27 @@ def fetch(query, params=None):
     connection, cursor = connect()
     cursor.execute(query, params or ())
     result = cursor.fetchall()
-    # disconnect(connection, cursor)
     return result
 
 def fetch_one(query, params=None):
     connection, cursor = connect()
     cursor.execute(query, params or ())
     result = cursor.fetchone()
-    # disconnect(connection, cursor)
     return result
 
 # a
 def count_size():
-    sql = "SELECT Size, COUNT(*) FROM `hidden-attribute` GROUP BY Size ORDER BY COUNT(*) DESC;"
+    sql = "SELECT Size, COUNT(*) FROM `hidden_attribute` GROUP BY Size ORDER BY COUNT(*) DESC;"
     return fetch_one(sql)
 
 # b
 def count_category():
-    sql = "SELECT GenusCategory, COUNT(*) FROM `hidden-attribute` GROUP BY GenusCategory ORDER BY COUNT(*) DESC;"
+    sql = "SELECT GenusCategory, COUNT(*) FROM `hidden_attribute` GROUP BY GenusCategory ORDER BY COUNT(*) DESC;"
     return fetch_one(sql)
 
 # c
 def count_hp():
-    sql = "SELECT HP, COUNT(*) FROM `hidden-attribute` GROUP BY HP ORDER BY COUNT(*) DESC;"
+    sql = "SELECT HP, COUNT(*) FROM `hidden_attribute` GROUP BY HP ORDER BY COUNT(*) DESC;"
     return fetch_one(sql)
 
 # d
@@ -62,7 +60,7 @@ def count_food():
 
 # f
 def select_items():
-    sql = "SELECT `English name` FROM `job-skill` WHERE `ranch items` IS NOT NULL;"
+    sql = "SELECT `English name` FROM `job_skill` WHERE `ranch items` IS NOT NULL;"
     return fetch(sql)
 
 # g
