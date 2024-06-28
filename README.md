@@ -4,6 +4,20 @@
 
 Juin 2024
 
+## ATTENTION :
+Les identifiants de connexion à la base de données sont dans le fichier .env  
+Ce fichier ne doit pas être sur github, car c'est un repo public.
+
+Pour que les script ai accès aux variables d'environnement (identifiants de connexion), il faut :  
+- Le fichier .env
+- Installer Le package dotenv
+- Appeler .env dans db.py
+
+Pour installez python-dotenv via pip :
+```sh
+pip install python-dotenv
+``` 
+
 ## Contexte
 
 A partir d'un dataset obtenu après une extraction des données du jeu, nous avons accès à des informations précises et en temps réel des Pals :
