@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
     experience_multiplier BIGINT,
     price BIGINT,
     air_response VARCHAR(255),
-    ai_sight_response DOUBLE PRECISION,
+    ai_sight_response INT,
     slow_walking_speed BIGINT,
     walking_speed BIGINT,
     running_speed BIGINT,
