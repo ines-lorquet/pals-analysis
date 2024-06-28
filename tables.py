@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
     experience_multiplier BIGINT,
     price BIGINT,
     air_response VARCHAR(255),
-    ai_sight_response INT,
+    ai_sight_response VARCHAR(255),
     slow_walking_speed BIGINT,
     walking_speed BIGINT,
     running_speed BIGINT,
@@ -160,8 +160,8 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
     pasture BIGINT,
     passive_skill_1 VARCHAR(255),
     passive_skill_2 VARCHAR(255),
-    passive_skill_3 DOUBLE PRECISION,
-    passive_skill_4 DOUBLE PRECISION
+    passive_skill_3 VARCHAR(255),
+    passive_skill_4 VARCHAR(255)
 );
 
 
@@ -185,9 +185,11 @@ create_ordinary_boss = """
 CREATE TABLE IF NOT EXISTS ordinary_boss (
     name VARCHAR(50),
     hp INT,
-    empty2 VARCHAR(50),
-    remote_attack INT,
     empty1 INT,
+    name1 VARCHAR(50),
+    remote_attack INT,
+    empty2 VARCHAR(50),
+    name2 VARCHAR(50),
     riding_speed INT
 );
 """
