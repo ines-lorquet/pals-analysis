@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
     tribe VARCHAR(255),
     bp_class VARCHAR(255),
     pictorial_id BIGINT,
-    zukan_index_suffix DOUBLE PRECISION,
+    zukan_index_suffix INT,
     size VARCHAR(255),
     rarity BIGINT,
     element1 VARCHAR(255),

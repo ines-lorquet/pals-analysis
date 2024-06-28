@@ -57,24 +57,24 @@ if __name__ == "__main__":
 
     path = 'raw_data'
 
-    # Création des tables si elles n'existent pas déjà
-    cursor.execute(create_combat_attribute)
-    cursor.execute(create_job_skill)
-    cursor.execute(create_hidden_attribute)
-    cursor.execute(create_refresh_area)
-    cursor.execute(create_ordinary_boss)
-    cursor.execute(create_tower_boss)
+    # # Création des tables si elles n'existent pas déjà
+    # cursor.execute(create_combat_attribute)
+    # cursor.execute(create_job_skill)
+    # cursor.execute(create_hidden_attribute)
+    # # cursor.execute(create_refresh_area)
+    # cursor.execute(create_ordinary_boss)
+    # cursor.execute(create_tower_boss)
 
     # Fichiers .csv et tables correspondantes
     csv_files_and_tables = [
         ('Palworld_Data--Palu combat attribute table.csv',           'combat_attribute'),
         ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
-        ('Palworld_Data-comparison of ordinary BOSS attributes.csv', 'ordinary_boss_attribute'),
+        ('Palworld_Data-comparison of ordinary BOSS attributes.csv', 'ordinary_boss'),
         ('Palworld_Data-hide pallu attributes.csv',                  'hidden_attribute'),
         ('Palworld_Data-Palu Job Skills Table.csv',                  'job_skill'),
-        ('Palworld_Data-Tower BOSS attribute comparison.csv',        'tower_boss_attribute')
+        ('Palworld_Data-Tower BOSS attribute comparison.csv',        'tower_boss')
     ]
-
+  
     # Importation des données
     for csv_file, table_name in csv_files_and_tables:
         csv_file_name = os.path.join(path, csv_file)

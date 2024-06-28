@@ -28,11 +28,11 @@ def clean_csv(file_path, rows_to_skip, output_path):
         #     print(row)
 
         from tables import (create_combat_attribute,
-                    create_job_skill, 
-                    create_hidden_attribute,
-                    create_refresh_area,
-                    create_ordinary_boss,
-                    create_tower_boss)
+                            create_job_skill, 
+                            create_hidden_attribute,
+                            create_refresh_area,
+                            create_ordinary_boss,
+                            create_tower_boss)
         conn = connect()
         cursor = conn.cursor(buffered=True)
 
@@ -45,8 +45,8 @@ def clean_csv(file_path, rows_to_skip, output_path):
         cursor.execute("SELECT DISTINCT * FROM job_skill;")
         cursor.execute(create_hidden_attribute)
         cursor.execute("SELECT DISTINCT * FROM hidden_attribute;")
-        cursor.execute(create_refresh_area)
-        cursor.execute("SELECT DISTINCT * FROM refresh_area;")
+        # cursor.execute(create_refresh_area)
+        # cursor.execute("SELECT DISTINCT * FROM refresh_area;")
         cursor.execute(create_ordinary_boss)
         cursor.execute("SELECT DISTINCT * FROM ordinary_boss;")
         cursor.execute(create_tower_boss)
