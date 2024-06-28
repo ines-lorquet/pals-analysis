@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS refresh_area (
     fecundity INT,
     palu_refresh_type VARCHAR(50),
     night_only BOOLEAN,
-    refresh_area VARCHAR(50),
+    refresh_area VARCHAR(50)
 );
 """
 
