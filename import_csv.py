@@ -8,9 +8,7 @@ from tables import (create_combat_attribute,
                     create_hidden_attribute,
                     create_refresh_area,
                     create_ordinary_boss,
-                    create_tower_boss,
-                    job_skill_find_doublon,
-                    job_skill_rename_doublon)
+                    create_tower_boss)
 
 '''
 Récupère les paramètres de connexion depuis .env et db.py
@@ -36,29 +34,12 @@ def import_csv_to_db(csv_file_name, table_name):
 
         insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
 
-        #  Check IDs to avoid having the same ID twice
-        existing_ids = set()
-        cursor.execute(f"SELECT id FROM {table_name}")
-        for (existing_id,) in cursor.fetchall():
-            existing_ids.add(existing_id)
-        ###
-
         for row in csv_reader:
             try:
-            #     cursor.execute(insert_query, row)
-                job_skill_id = row[0]  # Assuming ID is the first column
-                if job_skill_id not in existing_ids:
-                    cursor.execute(insert_query, row)
-                    existing_ids.add(job_skill_id)  # Add inserted ID to the set
-                else:
-                    print(f"Ignoré : ID déjà présent dans la table {table_name}: {job_skill_id}")
-
-
+                cursor.execute(insert_query, row)
             except mysql.connector.Error as err:
                 print(f"Erreur lors de l'insertion dans la table {table_name}: {err}")
-
-
-
+    
     conn.commit()
     cursor.close()
     close(conn)
@@ -75,6 +56,14 @@ if __name__ == "__main__":
     cursor = conn.cursor(buffered=True)
 
     path = 'raw_data'
+
+    # Création des tables si elles n'existent pas déjà
+    # cursor.execute(create_combat_attribute)
+    # cursor.execute(create_job_skill)
+    # cursor.execute(create_hidden_attribute)
+    # cursor.execute(create_refresh_area)
+    # cursor.execute(create_ordinary_boss)
+    # cursor.execute(create_tower_boss)
 
     # Fichiers .csv et tables correspondantes
     csv_files_and_tables = [

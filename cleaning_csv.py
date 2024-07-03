@@ -28,26 +28,21 @@ def clean_csv(file_path, rows_to_skip, output_path):
         #     print(row)
 
         from tables import (create_combat_attribute,
-                            create_job_skill, 
-                            create_hidden_attribute,
-                            create_refresh_area,
-                            create_ordinary_boss,
-                            create_tower_boss,
-                            job_skill_find_doublon,
-                            job_skill_rename_doublon
-                            )
+                    create_job_skill, 
+                    create_hidden_attribute,
+                    create_refresh_area,
+                    create_ordinary_boss,
+                    create_tower_boss)
         conn = connect()
         cursor = conn.cursor(buffered=True)
 
 
         # Create tables
-        # supprime les doublons de colonne
+        # supprime les doublons
         cursor.execute(create_combat_attribute)
         cursor.execute("SELECT DISTINCT * FROM combat_attribute;")
         cursor.execute(create_job_skill)
         cursor.execute("SELECT DISTINCT * FROM job_skill;")
-        # cursor.execute(job_skill_find_doublon)
-        # cursor.execute(job_skill_rename_doublon)
         cursor.execute(create_hidden_attribute)
         cursor.execute("SELECT DISTINCT * FROM hidden_attribute;")
         cursor.execute(create_refresh_area)
