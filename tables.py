@@ -59,7 +59,6 @@ CREATE TABLE IF NOT EXISTS combat_attribute (
 );
 """
 
-
 create_job_skill = """
 CREATE TABLE IF NOT EXISTS job_skill (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -88,6 +87,23 @@ CREATE TABLE IF NOT EXISTS job_skill (
 );
 
 """
+
+job_skill_find_doublon="""
+SELECT id, COUNT(id) AS occurrences
+FROM job_skill
+GROUP BY id
+HAVING COUNT(id) > 1;
+"""
+job_skill_rename_doublon="""
+SET @counter = 0;
+UPDATE job_skill
+SET id = (
+    SELECT @counter := @counter + 1
+    FROM (SELECT DISTINCT id FROM job_skill) AS t
+    WHERE t.id = job_skill.id
+);
+"""
+
 
 create_hidden_attribute = """
 CREATE TABLE IF NOT EXISTS hidden_attribute(
