@@ -187,10 +187,11 @@ create_refresh_area = """
 CREATE TABLE IF NOT EXISTS refresh_area (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50),
-    minimum_level INT,
-    maximum_level INT,
+    `minimum_level` INT,
+    `maximum_level` INT,
     empty1 INT,
     fecundity INT,
+    `level` INT,
     palu_refresh_type VARCHAR(50),
     night_only BOOLEAN,
     refresh_area VARCHAR(50)
