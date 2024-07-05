@@ -44,6 +44,16 @@ def clean_csv(file_path, rows_to_skip, output_path):
         # supprime les doublons de colonne
         cursor.execute(create_combat_attribute)
         cursor.execute("SELECT DISTINCT * FROM combat_attribute;")
+        cursor.execute("""
+                        UPDATE combat_attribute
+                        SET ispal = CASE 
+                            WHEN 'TRUE' THEN 1
+                            WHEN 'FALSE' THEN 0
+                            ELSE ispal
+                        END;
+                    """)
+
+
         cursor.execute(create_job_skill)
         cursor.execute("SELECT DISTINCT * FROM job_skill;")
         # cursor.execute(job_skill_find_doublon)

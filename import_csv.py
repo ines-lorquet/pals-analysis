@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Fichiers .csv et tables correspondantes
     csv_files_and_tables = [
         ('Palworld_Data--Palu combat attribute table.csv',           'combat_attribute'),
-        ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
+        # ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
         ('Palworld_Data-comparison of ordinary BOSS attributes.csv', 'ordinary_boss'),
         ('Palworld_Data-hide pallu attributes.csv',                  'hidden_attribute'),
         ('Palworld_Data-Palu Job Skills Table.csv',                  'job_skill'),
