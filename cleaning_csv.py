@@ -38,29 +38,30 @@ def clean_csv(file_path, rows_to_skip, output_path):
 
 
         # Create tables
-        # supprime les doublons
         cursor.execute(create_combat_attribute)
+        # supprime les doublons
         cursor.execute("SELECT DISTINCT * FROM combat_attribute;")
-        cursor.execute("""
-                        UPDATE combat_attribute
-                        SET ispal = CASE 
-                            WHEN 'TRUE' THEN 1
-                            WHEN 'FALSE' THEN 0
-                            ELSE ispal
-                        END;
-                    """)
-
+        # print("combat_attribute à été crée")
 
         cursor.execute(create_job_skill)
         cursor.execute("SELECT DISTINCT * FROM job_skill;")
+        # print("job_skill à été crée")
+
         cursor.execute(create_hidden_attribute)
         cursor.execute("SELECT DISTINCT * FROM hidden_attribute;")
+        # print("hidden_attribute à été crée")
+        
         cursor.execute(create_refresh_area)
         cursor.execute("SELECT DISTINCT * FROM refresh_area;")
+        # print("refresh_area à été crée")
+
         cursor.execute(create_ordinary_boss)
         cursor.execute("SELECT DISTINCT * FROM ordinary_boss;")
+        # print("ordinary_boss à été crée")
+
         cursor.execute(create_tower_boss)
         cursor.execute("SELECT DISTINCT * FROM tower_boss;")
+        # print("tower_boss à été crée")
 
 
         data = [row for row in data if row[1] != 'valeur_indesirable'] 

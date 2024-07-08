@@ -59,7 +59,6 @@ CREATE TABLE IF NOT EXISTS combat_attribute (
 );
 """
 
-
 create_job_skill = """
 CREATE TABLE IF NOT EXISTS job_skill (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -167,30 +166,53 @@ CREATE TABLE IF NOT EXISTS hidden_attribute(
 
 """
 
+# create_refresh_area = """
+# CREATE TABLE IF NOT EXISTS refresh_area (
+#     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+#     name VARCHAR(50),
+#     `minimum_level` INT,
+#     `maximum_level` INT,
+#     empty1 INT,
+#     fecundity INT,
+#     `level` INT,
+#     palu_refresh_type VARCHAR(50),
+#     night_only BOOLEAN,
+#     refresh_area VARCHAR(50)
+# );
+# """
+# LE CSV COMPORTE DES DOUBLON DE COLONNES
 create_refresh_area = """
 CREATE TABLE IF NOT EXISTS refresh_area (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
-    `minimum_level` INT,
-    `maximum_level` INT,
+    name VARCHAR(255),
+    minimum_level INT,
+    maximum_level INT,
     empty1 INT,
+    id_doublon INT,
+    name_duplicate VARCHAR(255),
+    minimum_level_duplicate INT,
     fecundity INT,
-    `level` INT,
-    palu_refresh_type VARCHAR(50),
+    palu_refresh_type VARCHAR(255),
     night_only BOOLEAN,
-    refresh_area VARCHAR(50)
-);
+    refresh_area VARCHAR(255),
+    empty2 INT,
+    name_duplicate2 VARCHAR(255),
+    maximum_level_duplicate INT,
+    palu_refresh_type_duplicate VARCHAR(255),
+    night_only_duplicate BOOLEAN,
+    refresh_area_duplicate VARCHAR(255)
+)
 """
 
 create_ordinary_boss = """
 CREATE TABLE IF NOT EXISTS ordinary_boss (
-    name VARCHAR(50),
+    name_duplicate VARCHAR(50),
     hp INT,
     empty1 INT,
-    name1 VARCHAR(50),
+    name_duplicate_2 VARCHAR(50),
     remote_attack INT,
     empty2 VARCHAR(50),
-    name2 VARCHAR(50),
+    name VARCHAR(50),
     riding_speed INT
 );
 """

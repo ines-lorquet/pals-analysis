@@ -2,13 +2,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 import csv
-from db import connect, close  # Assurez-vous que ces fonctions sont correctement implémentées dans db.py
-from tables import (create_combat_attribute,
-                    create_job_skill, 
-                    create_hidden_attribute,
-                    create_refresh_area,
-                    create_ordinary_boss,
-                    create_tower_boss)
+from db import connect, close  
 
 '''
 Récupère les paramètres de connexion depuis .env et db.py
@@ -27,18 +21,25 @@ def import_csv_to_db(csv_file_name, table_name):
 
     with open(csv_file_name, mode='r', encoding='utf-8-sig') as csv_file:
         csv_reader = csv.reader(csv_file)
-        header = next(csv_reader)  # Lire l'en-tête
+        header = next(csv_reader)
         
         columns = ', '.join(header)
         placeholders = ', '.join(['%s'] * len(header))
 
-        insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        # insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        insert_query = f"INSERT IGNORE INTO {table_name} ({columns}) VALUES ({placeholders})"
+
 
         for row in csv_reader:
+            # Remplacer les valeurs vides par None (ce qui devient NULL dans MySQL)
+            row = [None if val == '' else val for val in row]
             try:
                 cursor.execute(insert_query, row)
             except mysql.connector.Error as err:
                 print(f"Erreur lors de l'insertion dans la table {table_name}: {err}")
+    
+
+
     
     conn.commit()
     cursor.close()
@@ -57,18 +58,10 @@ if __name__ == "__main__":
 
     path = 'raw_data'
 
-    # Création des tables si elles n'existent pas déjà
-    # cursor.execute(create_combat_attribute)
-    # cursor.execute(create_job_skill)
-    # cursor.execute(create_hidden_attribute)
-    # cursor.execute(create_refresh_area)
-    # cursor.execute(create_ordinary_boss)
-    # cursor.execute(create_tower_boss)
-
     # Fichiers .csv et tables correspondantes
     csv_files_and_tables = [
         ('Palworld_Data--Palu combat attribute table.csv',           'combat_attribute'),
-        # ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
+        ('Palworld_Data--Palu refresh level.csv',                    'refresh_area'),
         ('Palworld_Data-comparison of ordinary BOSS attributes.csv', 'ordinary_boss'),
         ('Palworld_Data-hide pallu attributes.csv',                  'hidden_attribute'),
         ('Palworld_Data-Palu Job Skills Table.csv',                  'job_skill'),
@@ -81,6 +74,61 @@ if __name__ == "__main__":
         print(f"Importation des données depuis {csv_file_name} vers la table {table_name}...")
         import_csv_to_db(csv_file_name, table_name)
 
+
+
+
+    # -----------------------NETTOYAGE DES TABLES EN SQL---------------
+
+    # COMBAT_ATTRIBUTE
+
+    # remplace les valeurs 'yes' de la colonne nocturnal par 1, et les NULL par 0
+    try:
+        cursor.execute("""
+            UPDATE combat_attribute
+            SET nocturnal = CASE 
+                                WHEN nocturnal = 'yes' THEN 1
+                                ELSE 0
+                            END;
+        """)
+    except mysql.connector.Error as err:
+        print(f"Erreur lors de la mise à jour de la colonne nocturnal : {err}")
+
+    # Supprime les doublons d'id
+    cursor.execute("""
+        DELETE t1 FROM combat_attribute t1
+        INNER JOIN combat_attribute t2 
+        WHERE 
+            t1.id < t2.id AND 
+            t1.id = t2.id;
+    """)
+
+    # HIDDEN_ATTRIBUTE
+    cursor.execute("ALTER TABLE hidden_attribute DROP COLUMN ispal;")
+
+
+    # REFRESH_AREA   ----------pourquoi ID ne s'efface pas ? ? ? -------
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN id_doublon;")
+
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_duplicate;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN minimum_level_duplicate;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_duplicate2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN maximum_level_duplicate;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN palu_refresh_type_duplicate;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN night_only_duplicate;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN refresh_area_duplicate;")
+
+
+    # ORDINARY_BOSS   ----------name_duplicate et name_duplicate_2 ne s'effacent pas ? ? ? -------
+    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_duplicate;")
+    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_duplicate_2;")
+
+
+
+
+
+
+
+
     cursor.close()
     close(conn)
-    print("Les données ont été importées avec succès dans les tables.")
+
