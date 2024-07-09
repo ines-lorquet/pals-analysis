@@ -2,6 +2,7 @@
 /data
 /raw_data
 /processed_data
+test.py
 # Identifiant de connexion à la BDD
 .env
 # Byte-compiled / optimized / DLL files

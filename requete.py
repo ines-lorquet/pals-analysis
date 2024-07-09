@@ -1,3 +1,9 @@
+# import pandas as pd
+# from dotenv import load_dotenv
+# from db import connect, close
+
+# load_dotenv()
+
 import mysql.connector
 import pandas as pd
 
@@ -15,6 +21,12 @@ def connect():
     )
     cursor = connection.cursor()
     return connection, cursor
+
+def disconnect(connection, cursor):
+    cursor.close()
+    connection.close()
+
+
 
 def disconnect(connection, cursor):
     cursor.close()
