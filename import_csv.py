@@ -79,14 +79,18 @@ if __name__ == "__main__":
     # COMBAT_ATTRIBUTE
 
     # remplace les valeurs 'yes' de la colonne nocturnal par 1, et les NULL par 0
+    # -------------NE FONCTIONNE PAS---------------------------------------------
     try:
         cursor.execute("""
-            UPDATE combat_attribute
-            SET nocturnal = CASE 
-                                WHEN nocturnal = 'yes' THEN 1
-                                ELSE 0
-                            END;
+        UPDATE combat_attribute
+                SET nocturnal = CASE 
+                WHEN nocturnal = 'yes' THEN 1
+                WHEN nocturnal = '' THEN 0
+                ELSE nocturnal
+            END;
         """)
+
+
     except mysql.connector.Error as err:
         print(f"Erreur lors de la mise à jour de la colonne nocturnal : {err}")
 
@@ -103,21 +107,23 @@ if __name__ == "__main__":
     cursor.execute("ALTER TABLE hidden_attribute DROP COLUMN ispal;")
 
 
-    # REFRESH_AREA   ----------pourquoi ID ne s'efface pas ? ? ? -------
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN id_doublon;")
+    # REFRESH_AREA
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN empty_1;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN empty_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN id_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN id_3;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_3;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN minimum_level_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN maximum_level_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN palu_refresh_type_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN night_only_2;")
+    cursor.execute("ALTER TABLE refresh_area DROP COLUMN refresh_area_2;")
 
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_duplicate;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN minimum_level_duplicate;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN name_duplicate2;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN maximum_level_duplicate;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN palu_refresh_type_duplicate;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN night_only_duplicate;")
-    cursor.execute("ALTER TABLE refresh_area DROP COLUMN refresh_area_duplicate;")
 
-
-    # ORDINARY_BOSS   ----------name_duplicate et name_duplicate_2 ne s'effacent pas ? ? ? -------
-    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_duplicate;")
-    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_duplicate_2;")
+    # ORDINARY_BOSS
+    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_2;")
+    cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_3;")
 
 
 

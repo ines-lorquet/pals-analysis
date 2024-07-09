@@ -2,7 +2,7 @@ import mysql.connector
 from db import connect
 
 
-# 6 requests to create 6 empty tables
+'''6 requests to create 6 empty tables with the appropriate columns to fit the .csv files''' 
 
 create_combat_attribute ="""
 CREATE TABLE IF NOT EXISTS combat_attribute (
@@ -187,31 +187,32 @@ CREATE TABLE IF NOT EXISTS refresh_area (
     name VARCHAR(255),
     minimum_level INT,
     maximum_level INT,
-    empty1 INT,
-    id_doublon INT,
-    name_duplicate VARCHAR(255),
-    minimum_level_duplicate INT,
+    empty_1 INT,
+    id_2 INT,
+    name_2 VARCHAR(255),
+    minimum_level_2 INT,
     fecundity INT,
-    palu_refresh_type VARCHAR(255),
+    palu_refresh_type_2 VARCHAR(255),
     night_only BOOLEAN,
     refresh_area VARCHAR(255),
-    empty2 INT,
-    name_duplicate2 VARCHAR(255),
-    maximum_level_duplicate INT,
-    palu_refresh_type_duplicate VARCHAR(255),
-    night_only_duplicate BOOLEAN,
-    refresh_area_duplicate VARCHAR(255)
+    empty_2 INT,
+    id_3 INT,
+    name_3 VARCHAR(255),
+    maximum_level_2 INT,
+    palu_refresh_type VARCHAR(255),
+    night_only_2 BOOLEAN,
+    refresh_area_2 VARCHAR(255)
 )
 """
 
 create_ordinary_boss = """
 CREATE TABLE IF NOT EXISTS ordinary_boss (
-    name_duplicate VARCHAR(50),
+    name_2 VARCHAR(50),
     hp INT,
-    empty1 INT,
-    name_duplicate_2 VARCHAR(50),
+    empty_1 INT,
+    name_3 VARCHAR(50),
     remote_attack INT,
-    empty2 VARCHAR(50),
+    empty_2 VARCHAR(50),
     name VARCHAR(50),
     riding_speed INT
 );
