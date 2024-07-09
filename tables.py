@@ -218,6 +218,7 @@ CREATE TABLE IF NOT EXISTS ordinary_boss (
 );
 """
 
+    
 create_tower_boss = """
 CREATE TABLE IF NOT EXISTS tower_boss (
     name VARCHAR(50),

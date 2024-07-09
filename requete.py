@@ -33,70 +33,92 @@ def fetch_one(query, params=None):
     result = cursor.fetchone()
     return result
 
-# hidden_attribute
-# ordinary_boss
-# tower_boss
-
-# combat_attribute
-# job_skill
-# refresh_area
-
 # a
 def count_size():
     sql = "SELECT size, COUNT(*) FROM `hidden_attribute` GROUP BY size ORDER BY COUNT(*) DESC;"
+    print("\n")
+    print("\033[34ma : \033[0m")
+    print("Quelle est la distribution de la taille des Pals ?  ")
     return fetch_one(sql)
 
 # b
 def count_category():
     sql = "SELECT genus_category, COUNT(*) FROM `hidden_attribute` GROUP BY genus_category ORDER BY COUNT(*) DESC;"
+    print("\n")
+    print("\033[34mb : \033[0m")
+    print("Quelle est la distribution de la catégorie des Pals ?  ")
     return fetch_one(sql)
 
 # c
 def count_hp():
     sql = "SELECT hp, COUNT(*) FROM `hidden_attribute` GROUP BY hp ORDER BY COUNT(*) DESC;"
+    print("\n")
+    print("\033[34mc : \033[0m")
+    print("Quelle est la distribution des points de vie des Pals ?  ")
     return fetch_one(sql)
 
 # d
 def count_rarity():
     sql = "SELECT rarity, COUNT(*) FROM `combat_attribute` GROUP BY rarity ORDER BY COUNT(*) DESC;"
+    print("\n")
+    print("\033[34md : \033[0m")
+    print("  Quelle est la distribution de la rareté des Pals ?  ")
     return fetch_one(sql)
 
 # e
 def count_food():
     sql = "SELECT `food_intake`, COUNT(*) FROM `job_skill` GROUP BY `food_intake` ORDER BY COUNT(*) DESC;"
+    print("\n")
+    print("\033[34me : \033[0m")
+    print("  Quelle est la distribution de la consommation alimentaire des Pals ?  ")
     return fetch_one(sql)
 
 # f
 def select_items():
     sql = "SELECT `english_name` FROM `job_skill` WHERE `ranch_items` IS NOT NULL;"
+    print("\n")
+    print("\033[34mf : \033[0m")
+    print("  Quels sont les Pals pouvant offrir des produits utiles à votre campement grâce au ranch ?  ")
     return fetch(sql)
 
 # g
 def count_melee():
     sql = "SELECT melee_attack, COUNT(*) AS count FROM combat_attribute GROUP BY melee_attack ORDER BY melee_attack;"
+    print("\n")
+    print("\033[34mg : \033[0m")
+    print("  melee_attack  ")
     return fetch(sql)
 
 def count_remote():
     sql = "SELECT remote_attack, COUNT(*) AS count FROM combat_attribute GROUP BY remote_attack ORDER BY remote_attack;"
+    print("\n")
+    print("\033[34mg : \033[0m")
+    print("  remote_attack  ")
     return fetch(sql)
 
 def count_defense():
     sql = "SELECT defense, COUNT(*) AS count FROM combat_attribute GROUP BY defense ORDER BY defense;"
+    print("\n")
+    print("\033[34mg : \033[0m")
+    print("  defense  ")
     return fetch(sql)
 
 def top_10_pals():
-    sql = "SELECT ID, melee_attack, remote_attack, defense, (melee_attack + remote_attack + defense) AS total_power FROM combat_attribute ORDER BY total_power DESC LIMIT 10;"
-    print("total_power est créé-------------------------------------------------")
+    sql = "SELECT name, ID, melee_attack, remote_attack, defense, (melee_attack + remote_attack + defense) AS total_power FROM combat_attribute ORDER BY total_power DESC LIMIT 10;"
+    print("\n")
+    print("\033[34mg : \033[0m")
+    print("  Liste des 10 Pals les plus puissants  ")
     return fetch(sql)
+
 def add_total_power ():
     sql = "ALTER TABLE combat_attribute ADD COLUMN total_power INT;"
+    # sql = "ALTER TABLE combat_attribute DROP COLUMN total_power;"
     return fetch(sql)
+
 def update_total_power():
     sql = "UPDATE combat_attribute SET total_power = melee_attack + remote_attack + defense;"
     return fetch(sql)
-def test_total_power():
-    sql = "SELECT * FROM total_power"
-    return fetch(sql)
+
 # h
 def select_attack():
     sql = "SELECT melee_attack, remote_attack, defense FROM combat_attribute;"
@@ -125,7 +147,10 @@ def calculate_combat_attribute_correlations():
     corr_melee_remote = pearson_correlation(melee_attacks, remote_attacks)
     corr_melee_defense = pearson_correlation(melee_attacks, defenses)
     corr_remote_defense = pearson_correlation(remote_attacks, defenses)
-
+    print("\n")
+    print("\033[34mh : \033[0m")
+    print("Quelles sont les corrélations entre les différents attributs de combat ?")
+    
     return {
         'melee_remote': corr_melee_remote,
         'melee_defense': corr_melee_defense,
@@ -133,7 +158,6 @@ def calculate_combat_attribute_correlations():
     }
 
 # i
-""" pas encore"""
 
 # j
 def get_average_rarity_of_top_power_pals():
@@ -157,7 +181,6 @@ def get_average_rarity_of_top_power_pals():
     return result[0] if result else None
 
 # k
-"""pas encore"""
 
 # l
 
@@ -170,6 +193,9 @@ def get_average_rarity_of_top_power_pals():
 # p
 def count_night():
     sql = "SELECT COUNT(*) FROM job_skill WHERE night_shift = 'yes';"
+    print("\n")
+    print("\033[34mp : \033[0m")
+    print("Combien de Pals conviennent au travail de nuit ?")
     return fetch(sql)
 # q
 
@@ -177,7 +203,10 @@ def count_night():
 
 # s
 def max_speed():
-    sql = "SELECT English name,Handling speed FROM job_skill WHERE Handling speed = (SELECT MAX(Handling speed) FROM job_skill);"
+    sql = "SELECT english_name, handling_speed FROM job_skill WHERE handling_speed = (SELECT MAX(handling_speed) FROM job_skill);"
+    print("\n")
+    print("\033[34ms : \033[0m")
+    print("Quels sont les Pals qui ont la vitesse de travail la plus élevée ?  ")
     return fetch_one(sql)
 # t
 
@@ -186,6 +215,9 @@ def max_speed():
 # w
 def count_area():
     sql = "SELECT refresh_area, COUNT(*) AS nombre_d_apparitions FROM refresh_area GROUP BY refresh_area ORDER BY nombre_d_apparitions DESC;"
+    print("\n")
+    print("\033[34mw : \033[0m")
+    print("Quelle est la répartition des zones d apparition ?")
     return fetch_one(sql)
 
 
@@ -206,19 +238,19 @@ print(count_melee())
 print(count_remote())
 print(count_defense())
 print(top_10_pals())
+# print(add_total_power())
+# print(update_total_power())
 
-
-print(add_total_power())
-print(update_total_power())
 #h
-# correlation_matrix = calculate_combat_attribute_correlations()
-# print(correlation_matrix)
+correlation_matrix = calculate_combat_attribute_correlations()
+print(correlation_matrix)
 #i
 #...  
 # j
 # average_rarity = get_average_rarity_of_top_power_pals()
 # print(f"Rareté moyenne des Pals ayant la puissance d'attaque totale la plus élevée : {average_rarity}")
-print(test_total_power())
+# p
+print(count_night())
 #s
 print(max_speed())
 #t
