@@ -38,9 +38,6 @@ def import_csv_to_db(csv_file_name, table_name):
             except mysql.connector.Error as err:
                 print(f"Erreur lors de l'insertion dans la table {table_name}: {err}")
     
-
-
-    
     conn.commit()
     cursor.close()
     close(conn)
