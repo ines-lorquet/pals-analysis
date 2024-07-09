@@ -82,11 +82,10 @@ if __name__ == "__main__":
     # -------------NE FONCTIONNE PAS---------------------------------------------
     try:
         cursor.execute("""
-        UPDATE combat_attribute
-                SET nocturnal = CASE 
-                WHEN nocturnal = 'yes' THEN 1
-                WHEN nocturnal = '' THEN 0
-                ELSE nocturnal
+            UPDATE combat_attribute
+            SET nocturnal = CASE 
+                WHEN LOWER(nocturnal) = 'yes' THEN TRUE
+                ELSE FALSE
             END;
         """)
 
@@ -104,7 +103,7 @@ if __name__ == "__main__":
     """)
 
     # HIDDEN_ATTRIBUTE
-    cursor.execute("ALTER TABLE hidden_attribute DROP COLUMN ispal;")
+    cursor.execute("ALTER TABLE hidden_attribute DROP COLUMN is_pal;")
 
 
     # REFRESH_AREA
