@@ -23,49 +23,26 @@ def clean_csv(file_path, rows_to_skip, output_path):
         with open(file_path, mode='r', newline='', encoding='utf-8') as infile:
             reader = csv.reader(infile)
             data = list(reader)
-        
-        # for row in data[:rows_to_skip]:
-        #     print(row)
-
+        # Import the empty tables queries
         from tables import (create_combat_attribute,
                     create_job_skill, 
                     create_hidden_attribute,
                     create_refresh_area,
                     create_ordinary_boss,
                     create_tower_boss)
+        
         conn = connect()
         cursor = conn.cursor(buffered=True)
 
 
-        # Create tables
+        # Create the tables
         cursor.execute(create_combat_attribute)
-        # supprime les doublons
-        cursor.execute("SELECT DISTINCT * FROM combat_attribute;")
-        # print("combat_attribute à été crée")
-
         cursor.execute(create_job_skill)
-        cursor.execute("SELECT DISTINCT * FROM job_skill;")
-        # print("job_skill à été crée")
-
         cursor.execute(create_hidden_attribute)
-        cursor.execute("SELECT DISTINCT * FROM hidden_attribute;")
-        # print("hidden_attribute à été crée")
-        
         cursor.execute(create_refresh_area)
-        cursor.execute("SELECT DISTINCT * FROM refresh_area;")
-        # print("refresh_area à été crée")
-
         cursor.execute(create_ordinary_boss)
-        cursor.execute("SELECT DISTINCT * FROM ordinary_boss;")
-        # print("ordinary_boss à été crée")
-
         cursor.execute(create_tower_boss)
-        cursor.execute("SELECT DISTINCT * FROM tower_boss;")
-        # print("tower_boss à été crée")
 
-
-        data = [row for row in data if row[1] != 'valeur_indesirable'] 
-        
         # Skip the specified number of rows
         cleaned_data = data[rows_to_skip:]
 
@@ -74,7 +51,7 @@ def clean_csv(file_path, rows_to_skip, output_path):
             writer = csv.writer(outfile)
             writer.writerows(cleaned_data)
 
-        print(f"Fichier nettoyé enregistré sous : {output_path}")
+        print(f"Fichier nettoye enregistre sous : {output_path}")
     
     except Exception as e:
         print(f"Erreur lors du traitement du fichier {file_path}: {e}")
@@ -92,7 +69,7 @@ for file_name, rows_to_skip in files_to_clean:
     if os.path.exists(input_path):
         clean_csv(input_path, rows_to_skip, output_path)
     else:
-        print(f"Fichier {input_path} non trouvé. Skipping...")
+        print(f"Fichier {input_path} non trouve. Skipping...")
 
-print("Les fichiers CSV ont été nettoyés et enregistrés avec succès.")
+print("Les fichiers CSV ont ete nettoyes et enregistres avec succès.")
 

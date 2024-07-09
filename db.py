@@ -17,7 +17,7 @@ def connect():
         print(conn)
 
         if conn.is_connected():
-            print("Connexion réussie à la base de données")
+            print("Connexion reussie a la base de donnees")
             return conn
     except mysql.connector.Error as err:
         print(f"Erreur: {err}")
@@ -25,7 +25,7 @@ def connect():
 def close(conn):
     if conn.is_connected():
         conn.close()
-        print("La connexion à la base de données a été fermée")
+        print("La connexion a la base de donnees a ete fermee")
 
 
 ##############################################

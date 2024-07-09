@@ -2,6 +2,7 @@
 /data
 /raw_data
 /processed_data
+# Fichier de test
 test.py
 # Identifiant de connexion à la BDD
 .env

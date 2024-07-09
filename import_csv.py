@@ -10,11 +10,13 @@ Obtient la structure de table depuis tables.py
 
 Importe les données depuis raw_data
 Remplit les tables avec les données
+Suprime les colonnes en doublon
+
 '''
 def import_csv_to_db(csv_file_name, table_name):
     conn = connect()
     if conn is None:
-        print("Échec de la connexion à la base de données.")
+        print("echec de la connexion à la base de donnees.")
         return
     
     cursor = conn.cursor()
@@ -41,14 +43,14 @@ def import_csv_to_db(csv_file_name, table_name):
     conn.commit()
     cursor.close()
     close(conn)
-    print(f"Données importées avec succès dans la table {table_name}.")
+    print(f"Donnees importees avec succès dans la table {table_name}.")
 
 
 
 if __name__ == "__main__":
     conn = connect()
     if conn is None:
-        print("Échec de la connexion à la base de données principale.")
+        print("echec de la connexion à la base de donnees.")
         exit(1)
 
     cursor = conn.cursor(buffered=True)
@@ -68,7 +70,7 @@ if __name__ == "__main__":
     # Importation des données
     for csv_file, table_name in csv_files_and_tables:
         csv_file_name = os.path.join(path, csv_file)
-        print(f"Importation des données depuis {csv_file_name} vers la table {table_name}...")
+        print(f"Importation des donnees depuis {csv_file_name} vers la table {table_name}...")
         import_csv_to_db(csv_file_name, table_name)
 
 
@@ -76,10 +78,8 @@ if __name__ == "__main__":
 
     # -----------------------NETTOYAGE DES TABLES EN SQL---------------
 
-    # COMBAT_ATTRIBUTE
-
-    # remplace les valeurs 'yes' de la colonne nocturnal par 1, et les NULL par 0
-    # -------------NE FONCTIONNE PAS---------------------------------------------
+    # table combat_attribute
+    # remplace les valeurs de nocturnal par True et False -- NE FONCTIONNE PAS  ---
     try:
         cursor.execute("""
             UPDATE combat_attribute
@@ -88,11 +88,8 @@ if __name__ == "__main__":
                 ELSE FALSE
             END;
         """)
-
-
     except mysql.connector.Error as err:
         print(f"Erreur lors de la mise à jour de la colonne nocturnal : {err}")
-
     # Supprime les doublons d'id
     cursor.execute("""
         DELETE t1 FROM combat_attribute t1
@@ -102,11 +99,12 @@ if __name__ == "__main__":
             t1.id = t2.id;
     """)
 
-    # HIDDEN_ATTRIBUTE
+
+    # table hidden_attribute
     cursor.execute("ALTER TABLE hidden_attribute DROP COLUMN is_pal;")
 
 
-    # REFRESH_AREA
+    # table refresh_area
     cursor.execute("ALTER TABLE refresh_area DROP COLUMN empty_1;")
     cursor.execute("ALTER TABLE refresh_area DROP COLUMN empty_2;")
     cursor.execute("ALTER TABLE refresh_area DROP COLUMN id_2;")
@@ -120,16 +118,11 @@ if __name__ == "__main__":
     cursor.execute("ALTER TABLE refresh_area DROP COLUMN refresh_area_2;")
 
 
-    # ORDINARY_BOSS
+    # tabel ordinary_boss
     cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_2;")
     cursor.execute("ALTER TABLE ordinary_boss DROP COLUMN name_3;")
 
-
-
-
-
-
-
+    # ----------------  FIN DU NETTOYAGE DES TABLES EN SQL  ------------
 
     cursor.close()
     close(conn)
